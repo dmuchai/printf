@@ -58,21 +58,24 @@ int print_string(va_list types, char buffer[],
 	{
 		if (flags & F_MINUS)
 		{
-			write(1, &str[0], length);
-			for (i = width - length; i > 0; i--)
+			write(1, str, length);
+			write(1, "\n", 1);
+			for (i = width - length - 1; i > 0; i--)
 				write(1, " ", 1);
 			return (width);
 		}
 		else
 		{
-			for (i = width - length; i > 0; i--)
+			for (i = width - length - 1; i > 0; i--)
 				write(1, " ", 1);
-			write(1, &str[0], length);
+			write(1, str, length);
+			write(1, "\n", 1);
 			return (width);
 		}
 	}
-
-	return (write(1, str, length));
+	write(1, str, length);
+	write(1, "\n", 1);
+	return (length + 1);
 }
 /************************* PRINT PERCENT SIGN *************************/
 /**
