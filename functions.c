@@ -30,6 +30,7 @@ int print_char(va_list types, char buffer[],
  * @size: Size specifier
  * Return: Number of chars printed
  */
+
 int print_string(va_list types, char buffer[],
 	int flags, int width, int precision, int size)
 {
@@ -38,9 +39,8 @@ int print_string(va_list types, char buffer[],
 
 	UNUSED(buffer);
 	UNUSED(flags);
-	UNUSED(width);
-	UNUSED(precision);
 	UNUSED(size);
+
 	if (str == NULL)
 	{
 		str = "(null)";
@@ -54,7 +54,7 @@ int print_string(va_list types, char buffer[],
 	if (precision >= 0 && precision < length)
 		length = precision;
 
-	if (width > length)
+	if (width > length + 1)
 	{
 		if (flags & F_MINUS)
 		{
@@ -73,10 +73,12 @@ int print_string(va_list types, char buffer[],
 			return (width);
 		}
 	}
+
 	write(1, str, length);
 	write(1, "\n", 1);
 	return (length + 1);
 }
+
 /************************* PRINT PERCENT SIGN *************************/
 /**
  * print_percent - Prints a percent sign
